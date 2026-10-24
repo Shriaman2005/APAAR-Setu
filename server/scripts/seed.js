@@ -30,7 +30,7 @@ async function main() {
   console.log('\nSYNTHETIC DEMO DATA ONLY - development accounts, never use these in production.\n');
   console.log('Account'.padEnd(36), 'Role'.padEnd(26), 'Password');
   for (const user of result.users) {
-    const shown = user.password ? (sharedPassword ? '(DEMO_PASSWORD from .env)' : user.password) : '(unchanged - use --reset-passwords to set a new one)';
+    const shown = user.password ? (sharedPassword ? '(the DEMO_PASSWORD value you set)' : user.password) : '(unchanged - use --reset-passwords to set a new one)';
     console.log(user.email.padEnd(36), user.role.padEnd(26), shown);
   }
   console.log(`\nSeat policies: ${result.policiesCreated ? 'created DEMO-v1 (published) and DEMO-v2 (awaiting approval)' : 'already present'}.`);

@@ -1,0 +1,61 @@
+// Navigation menu per role. Hiding a link is only a convenience: the API enforces permissions.
+export const NAVIGATION = {
+  COLLEGE_OPERATOR: [
+    { to: '/college', label: 'Dashboard', end: true },
+    { to: '/college/upload', label: 'Upload batch' },
+    { to: '/college/batches', label: 'Batches' },
+    { to: '/college/seat-ledger', label: 'Seat ledger' },
+    { to: '/college/register', label: 'Register' },
+    { to: '/college/conflicts', label: 'Conflicts' },
+    { to: '/college/correction-requests', label: 'Correction requests' },
+  ],
+  COLLEGE_HEAD: [
+    { to: '/college', label: 'Dashboard', end: true },
+    { to: '/college/batches', label: 'Submissions' },
+    { to: '/college/seat-ledger', label: 'Seat ledger' },
+    { to: '/college/register', label: 'Register' },
+    { to: '/college/conflicts', label: 'Conflicts' },
+    { to: '/college/correction-requests', label: 'Correction requests' },
+    { to: '/college/audit', label: 'Audit' },
+  ],
+  AICTE_NATIONAL_OFFICER: [
+    { to: '/aicte', label: 'National dashboard', end: true },
+    { to: '/aicte/risk', label: 'Risk queue' },
+    { to: '/aicte/conflicts', label: 'Conflict monitor' },
+    { to: '/aicte/register', label: 'Register' },
+    { to: '/aicte/policies', label: 'Seat policies' },
+    { to: '/aicte/audit', label: 'Audit explorer' },
+  ],
+  AICTE_REGIONAL_OFFICER: [
+    { to: '/aicte', label: 'Regional dashboard', end: true },
+    { to: '/aicte/risk', label: 'Risk queue' },
+    { to: '/aicte/conflicts', label: 'Conflict monitor' },
+    { to: '/aicte/register', label: 'Register' },
+    { to: '/aicte/audit', label: 'Audit' },
+  ],
+  AICTE_SYSTEM_ADMIN: [
+    { to: '/admin', label: 'Dashboard', end: true },
+    { to: '/admin/users', label: 'Users' },
+    { to: '/admin/organisations', label: 'Organisations' },
+    { to: '/admin/policies', label: 'Seat policies' },
+    { to: '/admin/settings', label: 'Settings' },
+    { to: '/admin/audit', label: 'Audit explorer' },
+    { to: '/admin/ledger-check', label: 'Ledger check' },
+  ],
+  DEGREE_AWARDING_BODY: [
+    { to: '/issuer', label: 'Certificate workspace', end: true },
+    { to: '/issuer/credentials', label: 'Issued credentials' },
+  ],
+  VERIFIER: [
+    { to: '/verifier', label: 'My requests', end: true },
+    { to: '/verifier/requests/new', label: 'New request' },
+    { to: '/verifier/onboarding', label: 'Organisation' },
+  ],
+  STUDENT: [
+    { to: '/student', label: 'My record', end: true },
+    { to: '/student/consents', label: 'Consent inbox' },
+    { to: '/student/access-log', label: 'Access history' },
+    { to: '/student/credentials', label: 'Credentials' },
+    { to: '/student/corrections', label: 'Correction requests' },
+  ],
+};
