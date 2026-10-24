@@ -3,7 +3,7 @@
 // not probabilities, not machine learning, and never an automatic penalty or fraud finding.
 const mongoose = require('mongoose');
 const { RiskCase, Enrolment, SeatPolicy, SeatLedger, Institution, User } = require('../models');
-const { ROLES, OFFICER_ROLES, RISK_CASE_STATUS, POLICY_STATUS, USER_STATUS } = require('../config/constants');
+const { ROLES, RISK_CASE_STATUS, POLICY_STATUS, USER_STATUS } = require('../config/constants');
 const { forbidden, notFound, conflict, unprocessable } = require('../utils/AppError');
 const { readPagination, pageResult } = require('../utils/pagination');
 const { maskStudentRef, maskToken } = require('../utils/mask');
@@ -336,5 +336,4 @@ module.exports = {
   markReviewed: (user, id, summary) => closeCase(user, id, 'REVIEWED', summary),
   markFalsePositive: (user, id, reason) => closeCase(user, id, 'FALSE_POSITIVE', reason),
   escalateCase,
-  OFFICER_ROLES,
 };

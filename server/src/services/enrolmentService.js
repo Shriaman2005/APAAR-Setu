@@ -160,6 +160,7 @@ async function changeState(user, enrolmentRef, toState, reason) {
   if (!Object.values(ENROLMENT_STATE).includes(toState)) throw unprocessable('INVALID_STATE', 'Unknown target state.');
   const owned = await Enrolment.findOne({ enrolmentRef, institutionId: user.institutionId }, { _id: 1 }).lean();
   if (!owned) throw notFound('Enrolment not found.');
+  // Required here (not at the top) because conflictService also imports this file.
   const { resolveConflictsIfCleared } = require('./conflictService');
   return runInTransaction(async (session) => {
     const result = await applyTransition({ enrolmentRef, toState, reason, actor: user, session });

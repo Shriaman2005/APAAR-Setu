@@ -1,5 +1,6 @@
 // Documented demo settings. Only the keys below exist; anything else is rejected.
-const { SystemSetting } = require('../models');
+const { SystemSetting, UploadBatch, ValidationIssue } = require('../models');
+const { SEVERITY } = require('../config/constants');
 const { recordAudit } = require('./auditService');
 const { unprocessable } = require('../utils/AppError');
 
@@ -68,13 +69,24 @@ async function updateSettings(changes, actor, reason) {
     await SystemSetting.updateOne({ key }, { $set: { value: changes[key], updatedBy: actor.id } }, { upsert: true });
   }
   const after = await getSettings();
+  // Issues record how PENDING checks were handled when they were validated. If that policy changes,
+  // open batches with pending checks must be revalidated so the new handling applies.
+  let batchesFlagged = 0;
+  if (before.pendingIdentityPolicy !== after.pendingIdentityPolicy) {
+    const batchIds = await ValidationIssue.distinct('batchId', { current: true, severity: SEVERITY.PENDING });
+    const result = await UploadBatch.updateMany(
+      { batchId: { $in: batchIds }, status: { $in: ['VALIDATED', 'NEEDS_CORRECTION', 'READY_FOR_REVIEW', 'RETURNED_FOR_CORRECTION', 'COMMIT_FAILED'] } },
+      { $set: { revalidationRequired: true, revalidationReason: 'PENDING_POLICY_CHANGED' } }
+    );
+    batchesFlagged = result.modifiedCount;
+  }
   await recordAudit({
     actor,
     action: 'SETTINGS_UPDATED',
     entityType: 'SystemSetting',
     entityRef: keys.join(','),
     reason,
-    payload: { changes: keys.map((key) => ({ key, from: before[key], to: after[key] })) },
+    payload: { changes: keys.map((key) => ({ key, from: before[key], to: after[key] })), batchesFlaggedForRevalidation: batchesFlagged },
   });
   return getSettingsWithDefinitions();
 }

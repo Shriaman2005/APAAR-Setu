@@ -1,0 +1,24 @@
+# OPTIONAL alternative to "npm run db:dev" for people who already use Docker.
+# Starts a single-node MongoDB replica set (needed for multi-document transactions).
+# NOTE: this file was NOT tested in the original build environment (Docker was not installed there).
+# Usage:  docker compose up -d   then use
+#   MONGODB_URI=mongodb://127.0.0.1:27017/apaar_setu_dev?replicaSet=rs0&directConnection=true
+services:
+  mongo:
+    image: mongo:8.0
+    command: ["--replSet", "rs0", "--bind_ip_all", "--port", "27017"]
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      # Initiates the replica set on first start; afterwards just reports its status.
+      test: >
+        mongosh --quiet --eval "try { rs.status().ok } catch (e) { rs.initiate({ _id: 'rs0', members: [{ _id: 0, host: 'localhost:27017' }] }).ok }"
+      interval: 5s
+      timeout: 10s
+      retries: 30
+      start_period: 5s
+
+volumes:
+  mongo-data:

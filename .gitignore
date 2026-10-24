@@ -17,3 +17,4 @@ client/dist/
 npm-debug.log*
 .DS_Store
 coverage/
+e2e/screenshots/

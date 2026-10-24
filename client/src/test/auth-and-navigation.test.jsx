@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { screen, waitFor, within } from '@testing-library/react';
+import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Route } from 'react-router-dom';
 import LoginPage, { validateLogin } from '../pages/public/LoginPage';

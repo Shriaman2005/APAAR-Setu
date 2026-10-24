@@ -1,0 +1,25 @@
+{
+  "name": "apaar-setu",
+  "version": "0.1.0",
+  "private": true,
+  "description": "APAAR Setu - AICTE Verified Student Register prototype (MERN, synthetic data only). Convenience scripts for the server/ and client/ packages.",
+  "scripts": {
+    "install:all": "npm install && npm --prefix server install && npm --prefix client install",
+    "db:dev": "npm --prefix server run db:dev",
+    "seed": "npm --prefix server run seed",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "dev": "concurrently --names api,web --prefix-colors blue,green \"npm run dev:server\" \"npm run dev:client\"",
+    "test": "npm --prefix server test && npm --prefix client test",
+    "test:server": "npm --prefix server test",
+    "test:client": "npm --prefix client test",
+    "lint": "npm --prefix server run lint",
+    "build": "npm --prefix client run build",
+    "start": "npm --prefix server start",
+    "test:browser": "node e2e/browser-journey.mjs && node e2e/route-sweep.mjs"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6",
+    "puppeteer-core": "^25.16.0"
+  }
+}
