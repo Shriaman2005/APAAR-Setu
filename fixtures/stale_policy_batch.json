@@ -1,0 +1,33 @@
+{
+  "_notice": "SYNTHETIC DEMO DATA - fabricated for software testing only. Not real students, institutions, identifiers or AICTE quotas.",
+  "scenario": "Batch validated under DEMO-v1; the active demo rules become DEMO-v2 (seeded as awaiting approval) before certification. Certification must then be refused and the batch sent back for revalidation.",
+  "institutionCode": "ABC-DEMO",
+  "academicYear": "2026-27",
+  "validatedUnder": "DEMO-v1",
+  "becomesActive": "DEMO-v2",
+  "sourceFileName": "stale_policy_batch.csv",
+  "rows": [
+    {
+      "studentCode": "STU-041",
+      "studentName": "Zoya Ahmed",
+      "courseCode": "ECE",
+      "academicYear": "2026-27",
+      "bucketCode": "REGULAR",
+      "externalIdDemo": "888888888801",
+      "contactToken": "PHONE-DEMO-S1",
+      "yearOfStudy": "1",
+      "admittedOn": "2026-08-12"
+    },
+    {
+      "studentCode": "STU-042",
+      "studentName": "Yash Thakur",
+      "courseCode": "ECE",
+      "academicYear": "2026-27",
+      "bucketCode": "REGULAR",
+      "externalIdDemo": "888888888802",
+      "contactToken": "PHONE-DEMO-S2",
+      "yearOfStudy": "1",
+      "admittedOn": "2026-08-14"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "_notice": "SYNTHETIC DEMO DATA - fabricated for software testing only. Not real students, institutions, identifiers or AICTE quotas.",
+  "purpose": "Additional committed enrolments so dashboards show realistic (synthetic) distributions.",
+  "academicYear": "2026-27",
+  "enrolments": [
+    {
+      "studentCode": "STU-021",
+      "displayName": "Ishita Rao",
+      "syntheticExternalId": "666666666621",
+      "institutionCode": "XYZ-DEMO",
+      "courseCode": "CSE",
+      "bucketCode": "REGULAR",
+      "yearOfStudy": 1,
+      "admittedOn": "2026-08-03",
+      "contactToken": "PHONE-DEMO-X1"
+    },
+    {
+      "studentCode": "STU-022",
+      "displayName": "Dev Malhotra",
+      "syntheticExternalId": "666666666622",
+      "institutionCode": "XYZ-DEMO",
+      "courseCode": "IT",
+      "bucketCode": "NRI",
+      "yearOfStudy": 1,
+      "admittedOn": "2026-08-04",
+      "contactToken": "PHONE-DEMO-X2"
+    },
+    {
+      "studentCode": "STU-031",
+      "displayName": "Tara Kapoor",
+      "syntheticExternalId": "666666666631",
+      "institutionCode": "ABC-DEMO",
+      "courseCode": "ECE",
+      "bucketCode": "REGULAR",
+      "yearOfStudy": 1,
+      "admittedOn": "2026-08-02",
+      "contactToken": "PHONE-DEMO-E1"
+    },
+    {
+      "studentCode": "STU-032",
+      "displayName": "Vikram Nair",
+      "syntheticExternalId": "666666666632",
+      "institutionCode": "ABC-DEMO",
+      "courseCode": "ECE",
+      "bucketCode": "REGULAR",
+      "yearOfStudy": 1,
+      "admittedOn": "2026-08-03",
+      "contactToken": "PHONE-DEMO-E2"
+    },
+    {
+      "studentCode": "STU-033",
+      "displayName": "Sana Qureshi",
+      "syntheticExternalId": "666666666633",
+      "institutionCode": "ABC-DEMO",
+      "courseCode": "ECE",
+      "bucketCode": "TFW",
+      "yearOfStudy": 1,
+      "admittedOn": "2026-08-03",
+      "contactToken": "PHONE-DEMO-E3"
+    },
+    {
+      "studentCode": "STU-034",
+      "displayName": "Arjun Pillai",
+      "syntheticExternalId": "666666666634",
+      "institutionCode": "ABC-DEMO",
+      "courseCode": "ECE",
+      "bucketCode": "REGULAR",
+      "yearOfStudy": 2,
+      "admittedOn": "2026-08-04",
+      "contactToken": "PHONE-DEMO-E4"
+    },
+    {
+      "studentCode": "STU-035",
+      "displayName": "Pooja Iyer",
+      "syntheticExternalId": "666666666635",
+      "institutionCode": "ABC-DEMO",
+      "courseCode": "ECE",
+      "bucketCode": "NRI",
+      "yearOfStudy": 1,
+      "admittedOn": "2026-08-05",
+      "contactToken": "PHONE-DEMO-E5"
+    },
+    {
+      "studentCode": "STU-201",
+      "displayName": "Riya Bhatt",
+      "syntheticExternalId": "888888888803",
+      "institutionCode": "LMN-DEMO",
+      "courseCode": "DME",
+      "bucketCode": "REGULAR",
+      "yearOfStudy": 1,
+      "admittedOn": "2026-08-06",
+      "contactToken": "PHONE-DEMO-L1"
+    },
+    {
+      "studentCode": "STU-202",
+      "displayName": "Omkar Patil",
+      "syntheticExternalId": "888888888804",
+      "institutionCode": "LMN-DEMO",
+      "courseCode": "DME",
+      "bucketCode": "REGULAR",
+      "yearOfStudy": 1,
+      "admittedOn": "2026-08-07",
+      "contactToken": "PHONE-DEMO-L2"
+    }
+  ]
+}

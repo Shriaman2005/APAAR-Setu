@@ -1,0 +1,83 @@
+{
+  "_notice": "SYNTHETIC DEMO DATA - fabricated for software testing only. Not real students, institutions, identifiers or AICTE quotas.",
+  "scenario": "Twelve synthetic student records share contactToken PHONE-DEMO-SHARED (risk signal only, never a fraud label).",
+  "academicYear": "2026-27",
+  "institutionCode": "PQR-DEMO",
+  "courseCode": "CSE",
+  "bucketCode": "REGULAR",
+  "contactToken": "PHONE-DEMO-SHARED",
+  "students": [
+    {
+      "studentCode": "STU-101",
+      "displayName": "Ananya Gupta",
+      "syntheticExternalId": "777777777701",
+      "admittedOn": "2026-08-10"
+    },
+    {
+      "studentCode": "STU-102",
+      "displayName": "Rahul Bose",
+      "syntheticExternalId": "777777777702",
+      "admittedOn": "2026-08-11"
+    },
+    {
+      "studentCode": "STU-103",
+      "displayName": "Simran Kaur",
+      "syntheticExternalId": "777777777703",
+      "admittedOn": "2026-08-12"
+    },
+    {
+      "studentCode": "STU-104",
+      "displayName": "Farhan Ali",
+      "syntheticExternalId": "777777777704",
+      "admittedOn": "2026-08-13"
+    },
+    {
+      "studentCode": "STU-105",
+      "displayName": "Lakshmi Menon",
+      "syntheticExternalId": "777777777705",
+      "admittedOn": "2026-08-14"
+    },
+    {
+      "studentCode": "STU-106",
+      "displayName": "Nikhil Joshi",
+      "syntheticExternalId": "777777777706",
+      "admittedOn": "2026-08-15"
+    },
+    {
+      "studentCode": "STU-107",
+      "displayName": "Priya Reddy",
+      "syntheticExternalId": "777777777707",
+      "admittedOn": "2026-08-16"
+    },
+    {
+      "studentCode": "STU-108",
+      "displayName": "Sameer Khan",
+      "syntheticExternalId": "777777777708",
+      "admittedOn": "2026-08-17"
+    },
+    {
+      "studentCode": "STU-109",
+      "displayName": "Divya Pandey",
+      "syntheticExternalId": "777777777709",
+      "admittedOn": "2026-08-18"
+    },
+    {
+      "studentCode": "STU-110",
+      "displayName": "Karan Chawla",
+      "syntheticExternalId": "777777777710",
+      "admittedOn": "2026-08-19"
+    },
+    {
+      "studentCode": "STU-111",
+      "displayName": "Meghna Sen",
+      "syntheticExternalId": "777777777711",
+      "admittedOn": "2026-08-20"
+    },
+    {
+      "studentCode": "STU-112",
+      "displayName": "Aditya Kulkarni",
+      "syntheticExternalId": "777777777712",
+      "admittedOn": "2026-08-21"
+    }
+  ]
+}

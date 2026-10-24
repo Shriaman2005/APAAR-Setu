@@ -1,0 +1,176 @@
+{
+  "_notice": "SYNTHETIC DEMO DATA - fabricated for software testing only. Not real students, institutions, identifiers or AICTE quotas. These capacities are example test data only and must never become production defaults.",
+  "academicYear": "2026-27",
+  "policyVersion": "DEMO-v2",
+  "sourceType": "SYNTHETIC_DEMO_CONFIG",
+  "sourceReference": "FIXTURE:fixtures/seat_policy_demo_v2.json (synthetic revision for the stale-policy scenario)",
+  "notes": "Synthetic revision: ABC-DEMO/ECE moves 2 seats from REGULAR (57->55) to NRI (3->5). Used to demonstrate stale-policy handling.",
+  "admissionWindow": {
+    "opensOn": "2026-07-01",
+    "closesOn": "2026-09-30"
+  },
+  "scopes": [
+    {
+      "institutionCode": "ABC-DEMO",
+      "courseCode": "CSE",
+      "buckets": [
+        {
+          "code": "REGULAR",
+          "capacity": 57,
+          "countsWithinIntake": true
+        },
+        {
+          "code": "NRI",
+          "capacity": 3,
+          "countsWithinIntake": true
+        },
+        {
+          "code": "TFW",
+          "capacity": 3,
+          "countsWithinIntake": false
+        },
+        {
+          "code": "INTERNATIONAL",
+          "capacity": 3,
+          "countsWithinIntake": false
+        }
+      ]
+    },
+    {
+      "institutionCode": "ABC-DEMO",
+      "courseCode": "ECE",
+      "buckets": [
+        {
+          "code": "REGULAR",
+          "capacity": 55,
+          "countsWithinIntake": true
+        },
+        {
+          "code": "NRI",
+          "capacity": 5,
+          "countsWithinIntake": true
+        },
+        {
+          "code": "TFW",
+          "capacity": 3,
+          "countsWithinIntake": false
+        },
+        {
+          "code": "INTERNATIONAL",
+          "capacity": 3,
+          "countsWithinIntake": false
+        }
+      ]
+    },
+    {
+      "institutionCode": "PQR-DEMO",
+      "courseCode": "CSE",
+      "buckets": [
+        {
+          "code": "REGULAR",
+          "capacity": 57,
+          "countsWithinIntake": true
+        },
+        {
+          "code": "NRI",
+          "capacity": 3,
+          "countsWithinIntake": true
+        },
+        {
+          "code": "TFW",
+          "capacity": 3,
+          "countsWithinIntake": false
+        },
+        {
+          "code": "INTERNATIONAL",
+          "capacity": 3,
+          "countsWithinIntake": false
+        }
+      ]
+    },
+    {
+      "institutionCode": "PQR-DEMO",
+      "courseCode": "CIVIL",
+      "buckets": [
+        {
+          "code": "REGULAR",
+          "capacity": 57,
+          "countsWithinIntake": true
+        },
+        {
+          "code": "NRI",
+          "capacity": 3,
+          "countsWithinIntake": true
+        },
+        {
+          "code": "TFW",
+          "capacity": 3,
+          "countsWithinIntake": false
+        }
+      ]
+    },
+    {
+      "institutionCode": "XYZ-DEMO",
+      "courseCode": "CSE",
+      "buckets": [
+        {
+          "code": "REGULAR",
+          "capacity": 57,
+          "countsWithinIntake": true
+        },
+        {
+          "code": "NRI",
+          "capacity": 3,
+          "countsWithinIntake": true
+        },
+        {
+          "code": "TFW",
+          "capacity": 3,
+          "countsWithinIntake": false
+        },
+        {
+          "code": "INTERNATIONAL",
+          "capacity": 3,
+          "countsWithinIntake": false
+        }
+      ]
+    },
+    {
+      "institutionCode": "XYZ-DEMO",
+      "courseCode": "IT",
+      "buckets": [
+        {
+          "code": "REGULAR",
+          "capacity": 57,
+          "countsWithinIntake": true
+        },
+        {
+          "code": "NRI",
+          "capacity": 3,
+          "countsWithinIntake": true
+        },
+        {
+          "code": "TFW",
+          "capacity": 3,
+          "countsWithinIntake": false
+        }
+      ]
+    },
+    {
+      "institutionCode": "LMN-DEMO",
+      "courseCode": "DME",
+      "buckets": [
+        {
+          "code": "REGULAR",
+          "capacity": 57,
+          "countsWithinIntake": true
+        },
+        {
+          "code": "TFW",
+          "capacity": 3,
+          "countsWithinIntake": false
+        }
+      ]
+    }
+  ]
+}

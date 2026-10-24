@@ -1,0 +1,131 @@
+{
+  "_notice": "SYNTHETIC DEMO DATA - fabricated for software testing only. Not real students, institutions, identifiers or AICTE quotas.",
+  "regions": [
+    {
+      "regionId": "REGION-DEMO",
+      "name": "Demo Region North (synthetic)",
+      "stateCodes": [
+        "ST-DEMO-01",
+        "ST-DEMO-02"
+      ]
+    },
+    {
+      "regionId": "REGION-OTHER-DEMO",
+      "name": "Demo Region South (synthetic)",
+      "stateCodes": [
+        "ST-DEMO-03"
+      ]
+    },
+    {
+      "regionId": "REGION-EAST-DEMO",
+      "name": "Demo Region East (synthetic)",
+      "stateCodes": [
+        "ST-DEMO-04"
+      ]
+    }
+  ],
+  "institutions": [
+    {
+      "institutionCode": "ABC-DEMO",
+      "name": "ABC Institute of Technology (Demo)",
+      "stateCode": "ST-DEMO-01",
+      "regionId": "REGION-DEMO"
+    },
+    {
+      "institutionCode": "PQR-DEMO",
+      "name": "PQR College of Engineering (Demo)",
+      "stateCode": "ST-DEMO-02",
+      "regionId": "REGION-DEMO"
+    },
+    {
+      "institutionCode": "XYZ-DEMO",
+      "name": "XYZ Engineering College (Demo)",
+      "stateCode": "ST-DEMO-03",
+      "regionId": "REGION-OTHER-DEMO"
+    },
+    {
+      "institutionCode": "LMN-DEMO",
+      "name": "LMN Polytechnic (Demo)",
+      "stateCode": "ST-DEMO-04",
+      "regionId": "REGION-EAST-DEMO"
+    }
+  ],
+  "courses": [
+    {
+      "institutionCode": "ABC-DEMO",
+      "courseCode": "CSE",
+      "programName": "B.Tech Computer Science and Engineering",
+      "level": "UG",
+      "durationYears": 4,
+      "approvedIntake": 60
+    },
+    {
+      "institutionCode": "ABC-DEMO",
+      "courseCode": "ECE",
+      "programName": "B.Tech Electronics and Communication Engineering",
+      "level": "UG",
+      "durationYears": 4,
+      "approvedIntake": 60
+    },
+    {
+      "institutionCode": "PQR-DEMO",
+      "courseCode": "CSE",
+      "programName": "B.Tech Computer Science and Engineering",
+      "level": "UG",
+      "durationYears": 4,
+      "approvedIntake": 60
+    },
+    {
+      "institutionCode": "PQR-DEMO",
+      "courseCode": "CIVIL",
+      "programName": "B.Tech Civil Engineering",
+      "level": "UG",
+      "durationYears": 4,
+      "approvedIntake": 60
+    },
+    {
+      "institutionCode": "XYZ-DEMO",
+      "courseCode": "CSE",
+      "programName": "B.Tech Computer Science and Engineering",
+      "level": "UG",
+      "durationYears": 4,
+      "approvedIntake": 60
+    },
+    {
+      "institutionCode": "XYZ-DEMO",
+      "courseCode": "IT",
+      "programName": "B.Tech Information Technology",
+      "level": "UG",
+      "durationYears": 4,
+      "approvedIntake": 60
+    },
+    {
+      "institutionCode": "LMN-DEMO",
+      "courseCode": "DME",
+      "programName": "Diploma in Mechanical Engineering",
+      "level": "DIPLOMA",
+      "durationYears": 3,
+      "approvedIntake": 60
+    }
+  ],
+  "academicYear": "2026-27",
+  "organisations": [
+    {
+      "orgCode": "ISSUER-DEMO",
+      "name": "Demo Technical University (synthetic degree-awarding body)",
+      "type": "ISSUER",
+      "status": "APPROVED",
+      "affiliatedInstitutionCodes": [
+        "ABC-DEMO",
+        "PQR-DEMO"
+      ]
+    },
+    {
+      "orgCode": "VERIFIER-DEMO",
+      "name": "Demo Employer Verification Services (synthetic)",
+      "type": "VERIFIER",
+      "status": "APPROVED",
+      "verifierCategory": "EMPLOYER"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "_notice": "SYNTHETIC DEMO DATA - fabricated for software testing only. Not real students, institutions, identifiers or AICTE quotas.",
+  "scenario": "STU-005 has apparent active enrolments at College A (ABC-DEMO) and College B (XYZ-DEMO) for the same academic year.",
+  "academicYear": "2026-27",
+  "student": {
+    "studentCode": "STU-005",
+    "displayName": "Rohan Mehta",
+    "syntheticExternalId": "666666666605"
+  },
+  "enrolments": [
+    {
+      "institutionCode": "ABC-DEMO",
+      "courseCode": "CSE",
+      "bucketCode": "REGULAR",
+      "yearOfStudy": 1,
+      "admittedOn": "2026-08-05",
+      "state": "CONFIRMED",
+      "contactToken": "PHONE-DEMO-R"
+    },
+    {
+      "institutionCode": "XYZ-DEMO",
+      "courseCode": "CSE",
+      "bucketCode": "REGULAR",
+      "yearOfStudy": 1,
+      "admittedOn": "2026-08-20",
+      "state": "CONFIRMED",
+      "contactToken": "PHONE-DEMO-R"
+    }
+  ]
+}
