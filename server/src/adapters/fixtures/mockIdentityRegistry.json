@@ -1,5 +1,5 @@
 {
-  "_notice": "SYNTHETIC MOCK REGISTRY. Fabricated 12-digit demo identifiers and names for software testing only. Not real APAAR/Aadhaar data.",
+  "_notice": "SYNTHETIC MOCK REGISTRY. Fabricated 12-digit demo identifiers and names for software testing only (100000000001-100000000020 are reserved for automated tests). Not real APAAR/Aadhaar data.",
   "records": {
     "111111111111": "Aarav Sharma",
     "222222222222": "Neha Verma",
@@ -40,6 +40,26 @@
     "333333333331": "Rhea Sen",
     "333333333332": "Gaurav Iyer",
     "333333333341": "Nisha Pillai",
-    "333333333342": "Varun Rao"
+    "333333333342": "Varun Rao",
+    "100000000001": "Asha Kumar",
+    "100000000002": "Bhavna Joshi",
+    "100000000003": "Chetan Rao",
+    "100000000004": "Deepa Nair",
+    "100000000005": "Eshan Gill",
+    "100000000006": "Fatima Shaikh",
+    "100000000007": "Girish Menon",
+    "100000000008": "Harini Iyer",
+    "100000000009": "Irfan Khan",
+    "100000000010": "Jaya Pillai",
+    "100000000011": "Karthik Reddy",
+    "100000000012": "Leela Das",
+    "100000000013": "Mohan Lal",
+    "100000000014": "Nandini Bose",
+    "100000000015": "Om Prakash",
+    "100000000016": "Pallavi Singh",
+    "100000000017": "Qasim Ali",
+    "100000000018": "Ritu Sharma",
+    "100000000019": "Sunil Dutta",
+    "100000000020": "Tanya Arora"
   }
 }
