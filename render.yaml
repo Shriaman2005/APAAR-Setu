@@ -21,6 +21,10 @@ services:
       # never set and sign-in fails.
       - key: TRUST_PROXY
         value: "1"
+      # "Quick demo access" on the sign-in page: one click signs in to a seeded demo account.
+      # For the public prototype demo only; set to "false" to require passwords.
+      - key: DEMO_LOGIN
+        value: "true"
       # Asked for when the Blueprint is created: the Atlas connection string (never commit it).
       - key: MONGODB_URI
         sync: false

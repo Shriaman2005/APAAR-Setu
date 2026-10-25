@@ -40,6 +40,8 @@ Role abbreviations: **OP** college operator, **HEAD** college head, **NAT** nati
 | --- | --- | --- | --- |
 | GET | `/auth/csrf-token` | public | `{ csrfToken }` |
 | POST | `/auth/login` | public, throttled (failed attempts) | `{ email, password }` → `{ user, csrfToken }`. Session id regenerated. Generic 401 for every failure |
+| GET | `/auth/demo-accounts` | public | *added, prototype demos only*. `{ enabled, accounts: [{ email, role, scope }] }`: the seeded demo accounts offered for one-click sign-in; empty when `DEMO_LOGIN` is off |
+| POST | `/auth/demo-login` | public, throttled; exists only when `DEMO_LOGIN` is on | *added, prototype demos only*. `{ email }` of a seeded, active demo account → `{ user, csrfToken }`, exactly like `/auth/login` (session regenerated; audit `AUTH_LOGIN_SUCCEEDED` with `method: DEMO_ACCESS`). Any other account → 404 |
 | POST | `/auth/logout` | any | Destroys the session; idempotent |
 | GET | `/auth/me` | signed in | `{ user: { id, email, displayName, role, status, institution, regionIds, studentRef, organisation } }` |
 | POST | `/auth/change-password` | signed in | `{ currentPassword, newPassword }` → `{ changed, csrfToken }`; other sessions end |

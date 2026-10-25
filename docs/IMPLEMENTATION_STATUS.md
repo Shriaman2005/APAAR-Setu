@@ -23,7 +23,7 @@ All eight roles with backend permissions and working UI flows (see `IMPLEMENTATI
 - Degree-awarding body credentials, QR PNG, printable DEMO certificate, public status page with camera/image/manual input, revocation.
 - Hash-chained audit with verify-chain and a development tamper/restore script.
 - Dashboards for all roles from real aggregations; national/regional drill-down; masked CSV reports.
-- GST-portal-style UI with text size, high contrast, partial Hindi, responsive layout.
+- GST-portal-style UI with high contrast, partial Hindi, responsive layout, and one-click "Quick demo access" for reviewers.
 - Synthetic fixtures, safe idempotent seed, development-only reset, local replica-set launcher.
 
 ## 3. Commands run and results (latest run, 2026-10-25)
@@ -71,6 +71,8 @@ Environment: Ubuntu 24.04, Node 22.23.4, npm 11.13. Docker and a system MongoDB 
 ## 6. Assumptions and decisions (proposed implementation, not official policy)
 
 - Home page kept minimal at the user's request (2026-10-25): a welcome message with Login and Verify credential. The GST-style home blocks from `color_theme.md` (news, due dates, help topics, help desk, resources) and the `/public/overview` endpoint that fed them were removed.
+- Header and footer simplified at the user's request (2026-10-25): no utility strip (the skip link stays and appears on keyboard focus); High contrast and language sit in the logo header; the header's Login / Verify credential buttons were dropped because the home page has them; the footer shows only "APAAR Setu (Prototype)" and Back to top. The A- / A / A+ text-size control was removed; browser zoom covers larger text.
+- Quick demo access (one-click sign-in to the seeded demo accounts) added so reviewers and the hackathon audience need no passwords. It is behind `DEMO_LOGIN` and limited to synthetic demo accounts; see `SECURITY_AND_LIMITATIONS.md`.
 - Two-step warning disposition (operator justifies, head accepts); PENDING identity checks block by default.
 - Duplicate key: student code or demo identifier + course + academic year; "already active at this institution" is also an L3 error.
 - PROVISIONAL and CONFIRMED occupy seats; leaving them releases the seat exactly once.

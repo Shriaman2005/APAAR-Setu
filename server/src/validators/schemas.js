@@ -35,6 +35,9 @@ module.exports = {
     email: z.string({ error: 'Email is required.' }).trim().min(3, { error: 'Email is required.' }).max(254),
     password: z.string({ error: 'Password is required.' }).min(1, { error: 'Password is required.' }).max(200),
   }).strict(),
+  demoLogin: z.object({
+    email: z.string({ error: 'Choose a demo account.' }).trim().min(3, { error: 'Choose a demo account.' }).max(254),
+  }).strict(),
   changePassword: z.object({ currentPassword: z.string().min(1).max(200), newPassword: z.string().min(1).max(200) }).strict(),
   setPassword: z.object({ token: z.string().min(20).max(200), newPassword: z.string().min(1).max(200) }).strict(),
 

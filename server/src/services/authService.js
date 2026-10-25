@@ -1,7 +1,7 @@
 // Login, password changes and one-time activation/reset tokens.
 const bcrypt = require('bcrypt');
-const { User, Institution, Organisation } = require('../models');
-const { USER_STATUS } = require('../config/constants');
+const { User, Institution, Organisation, Region } = require('../models');
+const { USER_STATUS, ROLES } = require('../config/constants');
 const { AppError, unprocessable } = require('../utils/AppError');
 const { sha256Hex } = require('../utils/hash');
 const { recordAudit } = require('./auditService');
@@ -68,6 +68,48 @@ async function verifyCredentials(email, password) {
   return user;
 }
 
+const DEMO_ROLE_ORDER = [
+  ROLES.COLLEGE_OPERATOR, ROLES.COLLEGE_HEAD, ROLES.AICTE_NATIONAL_OFFICER, ROLES.AICTE_REGIONAL_OFFICER,
+  ROLES.AICTE_SYSTEM_ADMIN, ROLES.DEGREE_AWARDING_BODY, ROLES.VERIFIER, ROLES.STUDENT,
+];
+
+/**
+ * Seeded demo accounts offered for one-click sign-in (prototype demos only, behind DEMO_LOGIN).
+ * Returns no ids or personal data: just the email, role and a scope label for the button.
+ */
+async function listDemoAccounts() {
+  const users = await User.find({ isDemo: true, status: USER_STATUS.ACTIVE }, { emailNormalized: 1, role: 1, displayName: 1, institutionId: 1, organisationId: 1, regionIds: 1 }).lean();
+  const [institutions, organisations, regions] = await Promise.all([
+    Institution.find({ _id: { $in: users.map((u) => u.institutionId).filter(Boolean) } }, { name: 1 }).lean(),
+    Organisation.find({ _id: { $in: users.map((u) => u.organisationId).filter(Boolean) } }, { name: 1 }).lean(),
+    Region.find({ regionId: { $in: users.flatMap((u) => u.regionIds || []) } }, { regionId: 1, name: 1 }).lean(),
+  ]);
+  const institutionNames = new Map(institutions.map((i) => [String(i._id), i.name]));
+  const organisationNames = new Map(organisations.map((o) => [String(o._id), o.name]));
+  const regionNames = new Map(regions.map((r) => [r.regionId, r.name]));
+  return users
+    .map((u) => ({
+      email: u.emailNormalized,
+      role: u.role,
+      scope: institutionNames.get(String(u.institutionId)) || organisationNames.get(String(u.organisationId))
+        || (u.regionIds || []).map((id) => regionNames.get(id) || id).join(', ') || u.displayName,
+    }))
+    .sort((a, b) => DEMO_ROLE_ORDER.indexOf(a.role) - DEMO_ROLE_ORDER.indexOf(b.role) || a.email.localeCompare(b.email));
+}
+
+/**
+ * One-click sign-in for a seeded demo account (prototype demos only, behind DEMO_LOGIN).
+ * Only synthetic, active demo accounts qualify; role, scope and every permission check stay
+ * exactly as for a password sign-in.
+ */
+async function demoSignIn(email) {
+  const user = await User.findOne({ emailNormalized: normaliseEmail(email), isDemo: true, status: USER_STATUS.ACTIVE }).lean();
+  if (!user) throw new AppError(404, 'DEMO_ACCOUNT_NOT_FOUND', 'That demo account is not available.');
+  await User.updateOne({ _id: user._id }, { $set: { lastLoginAt: new Date() } });
+  await recordAudit({ actor: { id: user._id, role: user.role }, action: 'AUTH_LOGIN_SUCCEEDED', entityType: 'User', entityRef: String(user._id), institutionId: user.institutionId, regionIds: user.regionIds, payload: { method: 'DEMO_ACCESS' } });
+  return user;
+}
+
 // Safe user summary for GET /api/auth/me (never includes hashes or tokens).
 async function describeUser(user) {
   const [institution, organisation] = await Promise.all([
@@ -130,5 +172,5 @@ async function setPasswordWithToken(token, newPassword) {
 }
 
 module.exports = {
-  normaliseEmail, checkPasswordPolicy, hashPassword, verifyCredentials, describeUser, changePassword, setPasswordWithToken, bcryptRounds,
+  normaliseEmail, checkPasswordPolicy, hashPassword, verifyCredentials, listDemoAccounts, demoSignIn, describeUser, changePassword, setPasswordWithToken, bcryptRounds,
 };

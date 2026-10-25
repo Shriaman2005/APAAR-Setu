@@ -8,32 +8,19 @@ import { Icon, LoadingBlock, RoleChip } from '../components/ui';
 import { useToast } from '../components/Toasts';
 import NotificationBell from './NotificationBell';
 
-/* global __BUILD_DATE__ */
-const BUILD_DATE = typeof __BUILD_DATE__ === 'string' ? __BUILD_DATE__ : '';
-
-function UtilityStrip() {
-  const { t, language, setLanguage, highContrast, toggleContrast, decreaseText, resetText, increaseText } = usePreferences();
+// High contrast and language controls, in the header on every page.
+function DisplayControls() {
+  const { t, language, setLanguage, highContrast, toggleContrast } = usePreferences();
   return (
-    <div className="utility-strip">
-      <div className="container-xl d-flex flex-wrap justify-content-between align-items-center gap-2 py-1">
-        <a className="text-decoration-underline small fw-semibold" href="#main-content">{t('skipToContent')}</a>
-        <div className="d-flex flex-wrap align-items-center gap-2">
-          <span className="small text-muted d-none d-sm-inline">{t('textSize')}:</span>
-          <div className="btn-group" role="group" aria-label={t('textSize')}>
-            <button type="button" className="btn-utility" onClick={decreaseText} aria-label={t('decreaseText')}>A-</button>
-            <button type="button" className="btn-utility" onClick={resetText} aria-label={t('resetText')}>A</button>
-            <button type="button" className="btn-utility" onClick={increaseText} aria-label={t('increaseText')}>A+</button>
-          </div>
-          <button type="button" className="btn-utility" aria-pressed={highContrast ? 'true' : 'false'} onClick={toggleContrast}>
-            <Icon name="circle-half" className="me-1" />{t('highContrast')}
-          </button>
-          <label className="visually-hidden" htmlFor="language-select">{t('language')}</label>
-          <select id="language-select" className="form-select form-select-sm w-auto" value={language} onChange={(event) => setLanguage(event.target.value)}>
-            <option value="en">English</option>
-            <option value="hi">हिन्दी (आंशिक)</option>
-          </select>
-        </div>
-      </div>
+    <div className="display-controls d-flex align-items-center gap-2">
+      <button type="button" className="btn-utility" aria-pressed={highContrast ? 'true' : 'false'} onClick={toggleContrast}>
+        <Icon name="circle-half" className="me-1" />{t('highContrast')}
+      </button>
+      <label className="visually-hidden" htmlFor="language-select">{t('language')}</label>
+      <select id="language-select" className="form-select form-select-sm w-auto" value={language} onChange={(event) => setLanguage(event.target.value)}>
+        <option value="en">English</option>
+        <option value="hi">हिन्दी (आंशिक)</option>
+      </select>
     </div>
   );
 }
@@ -68,9 +55,10 @@ function Header() {
             <span className="brand-subtitle d-block">{t('siteSubtitle')}</span>
           </span>
         </Link>
-        <div className="d-flex flex-wrap align-items-center gap-2">
-          {user ? (
-            <>
+        <div className="d-flex flex-column align-items-end gap-2 ms-auto">
+          <DisplayControls />
+          {user && (
+            <div className="d-flex flex-wrap align-items-center justify-content-end gap-2">
               <NotificationBell />
               <div className="text-end me-1">
                 <Link to="/account" className="fw-semibold d-block text-decoration-none">{user.displayName}</Link>
@@ -80,12 +68,7 @@ function Header() {
                 {signingOut ? <span className="spinner-border spinner-border-sm me-2" aria-hidden="true" /> : <Icon name="box-arrow-right" />}
                 {signingOut ? 'Signing out...' : t('signOut')}
               </button>
-            </>
-          ) : (
-            <>
-              <Link className="btn btn-outline-primary" to="/verify"><Icon name="qr-code-scan" />{t('navVerify')}</Link>
-              <Link className="btn btn-accent" to="/login"><Icon name="box-arrow-in-right" />{t('login')}</Link>
-            </>
+            </div>
           )}
         </div>
       </div>
@@ -137,26 +120,9 @@ function Footer() {
   const { t } = usePreferences();
   return (
     <footer className="site-footer on-dark mt-5">
-      <div className="container-xl py-4">
-        <div className="row g-4">
-          <div className="col-md-4">
-            <h2 className="h3 text-white">APAAR Setu</h2>
-            <p className="footer-note mb-0">{t('footerPrototype')}</p>
-          </div>
-          <div className="col-md-4">
-            <ul className="list-unstyled mb-0">
-              <li><Link to="/help#about">{t('footerAbout')}</Link></li>
-              <li><Link to="/help#accessibility">{t('footerAccessibility')}</Link></li>
-              <li><Link to="/help#privacy">{t('footerPrivacy')}</Link></li>
-              <li><Link to="/verify">{t('navVerify')}</Link></li>
-            </ul>
-          </div>
-          <div className="col-md-4 footer-note">
-            <p className="mb-1">{t('footerHelp')}</p>
-            <p className="mb-1">{t('footerLastUpdated')}: {BUILD_DATE || '-'}</p>
-            <a href="#top">{t('backToTop')} <Icon name="arrow-up" /></a>
-          </div>
-        </div>
+      <div className="container-xl py-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <span className="fw-semibold">{t('footerName')}</span>
+        <a href="#top">{t('backToTop')} <Icon name="arrow-up" /></a>
       </div>
     </footer>
   );
@@ -165,9 +131,8 @@ function Footer() {
 export default function AppShell() {
   const { t } = usePreferences();
   return (
-    <div id="top">
+    <div id="top" className="app-shell">
       <a className="skip-link" href="#main-content">{t('skipToContent')}</a>
-      <UtilityStrip />
       <Header />
       <MainNav />
       <div className="prototype-bar">

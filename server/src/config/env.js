@@ -68,6 +68,9 @@ function buildConfig(overrides = {}) {
     sessionCookieName: 'apaar.sid',
     // Secure cookies need HTTPS. On by default in production; override with COOKIE_SECURE.
     cookieSecure: readBool('COOKIE_SECURE', isProduction),
+    // One-click sign-in to the seeded demo accounts (prototype demos only). On by default outside
+    // production; a public demo deployment switches it on with DEMO_LOGIN=true.
+    demoLogin: readBool('DEMO_LOGIN', !isProduction),
     // 'async' = validation runs in the background after the upload response (default);
     // 'sync'  = the request waits for validation (used by automated tests).
     validationMode: process.env.VALIDATION_MODE === 'sync' ? 'sync' : 'async',

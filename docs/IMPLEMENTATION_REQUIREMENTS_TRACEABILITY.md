@@ -126,9 +126,9 @@ Paths: `S/` = `server/src/`, `C/` = `client/src/`, `T/` = `server/tests/`.
 
 | # | Requirement | Implementation | Status |
 | --- | --- | --- | --- |
-| 77 | GST-portal layout: utility strip, header with logo, navy nav with orange active underline, home blocks, navy footer with prototype line, last-updated date, back to top | `C/app/AppShell.jsx`, `C/pages/public/HomePage.jsx` | Done, with one deliberate change: at the user's request (2026-10-25) the home page shows only a welcome message with Login and Verify credential; the news, due-dates, help-topics, help-desk and resources blocks were removed |
+| 77 | GST-portal layout: utility strip, header with logo, navy nav with orange active underline, home blocks, navy footer with prototype line, last-updated date, back to top | `C/app/AppShell.jsx`, `C/pages/public/HomePage.jsx` | Done, with deliberate changes at the user's request (2026-10-25): no utility strip (skip link kept, shown on focus; High contrast and language in the header); the home page shows only a welcome message with Login and Verify credential (news, due-dates, help-topics, help-desk and resources blocks removed); the footer shows only the platform name and Back to top |
 | 78 | Palette tokens, button variants, cards, KPI tiles, tables, badges (icon + text), alerts, forms, stepper, modal overlay | `C/styles/theme.css`, `C/components/*` | Done |
-| 79 | Accessibility checklist: skip link, A-/A/A+ up to 150%, high contrast, visible focus, no colour-only information | `PreferencesContext.jsx`, theme | Done; Lighthouse/axe audit **not** run |
+| 79 | Accessibility checklist: skip link, A-/A/A+ up to 150%, high contrast, visible focus, no colour-only information | `PreferencesContext.jsx`, theme | Done except A-/A/A+, removed at the user's request (2026-10-25; browser zoom covers larger text); Lighthouse/axe audit **not** run |
 | 80 | Language selector | English + Hindi for site chrome, home and sign-in (labelled "आंशिक"/partial) | Partial |
 | 81 | Own logo, no GST branding, not presented as official | `Instruction/apaar_setu_variant2.png` used; disclaimers | Done |
 

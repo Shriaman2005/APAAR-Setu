@@ -5,9 +5,6 @@ import react from '@vitejs/plugin-react';
 // so the browser sees ONE origin and the session cookie can stay SameSite=Lax.
 export default defineConfig({
   plugins: [react()],
-  define: {
-    __BUILD_DATE__: JSON.stringify(new Date().toISOString().slice(0, 10)),
-  },
   server: {
     port: 5173,
     proxy: {

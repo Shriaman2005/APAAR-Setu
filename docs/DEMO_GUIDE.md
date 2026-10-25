@@ -8,7 +8,7 @@ A repeatable demonstration based on spec `10_Synthetic_Demo_Data_and_Scenarios.p
 
 1. Start the database: `npm run db:dev` (leave it running).
 2. Fresh demo data: `npm --prefix server run demo:reset -- --confirm` (or `npm run seed` on an empty database). Note the passwords printed in the terminal, or set `DEMO_PASSWORD` in `.env` beforehand.
-3. Start the app: `npm run dev`, open http://localhost:5173.
+3. Start the app: `npm run dev`, open http://localhost:5173. On the sign-in page, **Quick demo access** signs in to any role with one click (no password); the email and password form works too.
 4. Use a separate browser profile or a private window per role so you can stay signed in as two users at once.
 
 Accounts: `operator.demo`, `head.demo`, `national.demo`, `regional.demo`, `admin.demo`, `approver.demo`, `issuer.demo`, `verifier.demo`, `student.demo`, `head.xyz.demo` (all `@example.test`).
@@ -91,7 +91,7 @@ Explain the limit honestly: the chain detects this uncoordinated change; someone
 | Student correction | Student → **My record → Request correction** (name) → head → **Correction requests → Accept** | Register name updated, old name kept in history |
 | User administration | Admin → **Users → Create user** | Account is *pending activation*; a one-time link is shown once (no email is sent) |
 | Regional isolation | As **regional.demo** edit the dashboard URL to `?regionId=REGION-OTHER-DEMO` | 403 - other regions are never shown |
-| Accessibility | Utility strip: **A+**, **High contrast**, **हिन्दी** | Text up to 150%, high-contrast palette, Hindi site chrome |
+| Accessibility | Header: **High contrast**, **हिन्दी**; press Tab on any page | High-contrast palette, Hindi site chrome, "Skip to main content" link; browser zoom for larger text |
 
 ## If something goes wrong
 

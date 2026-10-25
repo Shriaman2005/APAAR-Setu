@@ -34,7 +34,6 @@
   --role-aicte: #17375e;
   --role-student: #0b7a3e;
   --role-verifier: #6b3fa0;
-  --font-scale: 100%;
 
   /* Bootstrap variable overrides */
   --bs-body-font-family: 'Noto Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -51,7 +50,7 @@
   --bs-secondary-color: var(--muted);
 }
 
-/* High-contrast mode (toggle in the utility strip). */
+/* High-contrast mode (toggle in the site header). */
 :root[data-contrast='high'] {
   --blue: #0b2e5c;
   --blue-hover: #000000;
@@ -72,7 +71,6 @@
 }
 :root[data-contrast='high'] a { text-decoration: underline; }
 
-html { font-size: var(--font-scale); }
 body {
   background: var(--bg);
   color: var(--text);
@@ -107,13 +105,12 @@ a:hover { color: var(--navy); }
 .skip-link:focus { left: 8px; top: 8px; color: #fff; }
 
 /* ---------------------------------------------------------------- Layout */
-.utility-strip { background: var(--tint); border-bottom: 1px solid var(--border); font-size: 0.875rem; }
-.utility-strip .btn-utility {
-  background: transparent; border: 1px solid transparent; color: var(--navy); padding: 2px 8px; min-width: 0;
-  font-weight: 600; border-radius: var(--radius); line-height: 1.6;
+.display-controls .btn-utility {
+  background: transparent; border: 1px solid var(--border); color: var(--navy); padding: 3px 10px; min-width: 0;
+  font-size: 0.875rem; font-weight: 600; border-radius: var(--radius); line-height: 1.6;
 }
-.utility-strip .btn-utility:hover, .utility-strip .btn-utility[aria-pressed='true'] { border-color: var(--navy); background: #fff; }
-.utility-strip select { font-size: 0.875rem; padding: 0 1.75rem 0 0.5rem; height: 28px; border-color: var(--input-border); }
+.display-controls .btn-utility:hover, .display-controls .btn-utility[aria-pressed='true'] { border-color: var(--navy); background: var(--tint); }
+.display-controls select { font-size: 0.875rem; border-color: var(--input-border); }
 
 .site-header { background: var(--surface); border-bottom: 1px solid var(--border); }
 .site-header .brand img { height: 56px; width: auto; }
@@ -134,9 +131,10 @@ a:hover { color: var(--navy); }
 .site-footer { background: var(--navy); color: #fff; }
 .site-footer a { color: #fff; }
 .site-footer a:hover { color: #ffd9bf; }
-.site-footer .footer-note { color: #d6e0ec; font-size: 0.875rem; }
 
-main#main-content { min-height: 60vh; }
+/* The page fills the window so the footer sits at the bottom even on short pages. */
+.app-shell { display: flex; flex-direction: column; min-height: 100vh; }
+.app-shell > main { flex: 1 0 auto; }
 
 /* ---------------------------------------------------------------- Buttons (colour_theme.md section 3) */
 .btn {
@@ -261,11 +259,27 @@ main#main-content { min-height: 60vh; }
 .home-hero h1 { color: #fff; }
 .home-hero .lead { max-width: 44rem; margin: 0 auto 1.5rem; }
 
+/* Quick demo access on the sign-in page; the left border uses the role-chip colours. */
+.demo-account-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.5rem; }
+.demo-account {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; min-height: 44px;
+  background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--role-aicte);
+  border-radius: var(--radius); padding: 8px 12px; color: var(--text);
+}
+.demo-account:hover:not(:disabled) { background: var(--tint); border-color: var(--blue); }
+.demo-account:disabled { opacity: 0.65; cursor: progress; }
+.demo-account[data-role^='COLLEGE'] { border-left-color: var(--role-institution); }
+.demo-account[data-role='STUDENT'] { border-left-color: var(--role-student); }
+.demo-account[data-role='VERIFIER'], .demo-account[data-role='DEGREE_AWARDING_BODY'] { border-left-color: var(--role-verifier); }
+.demo-account-role { font-weight: 700; color: var(--navy); }
+.demo-account-scope { font-size: 0.8125rem; color: var(--muted); }
+.demo-more summary { color: var(--blue); font-weight: 600; cursor: pointer; }
+
 /* Printable demo certificate */
 .certificate { border: 6px double var(--navy); padding: 32px; background: #fff; position: relative; }
 .certificate .watermark { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 4rem; font-weight: 800; color: rgba(198, 40, 40, 0.12); transform: rotate(-20deg); pointer-events: none; }
 @media print {
-  .no-print, .utility-strip, .site-header, .main-nav, .prototype-bar, .site-footer, .toast-region { display: none !important; }
+  .no-print, .site-header, .main-nav, .prototype-bar, .site-footer, .toast-region { display: none !important; }
   body { background: #fff; }
 }
 

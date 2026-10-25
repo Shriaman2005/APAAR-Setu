@@ -26,7 +26,7 @@ The specification this was built from is in [`Instruction/`](Instruction/) (elev
 | Credentials & QR | Opaque reference with keyed checksum, QR PNG, printable DEMO certificate, public status VALID / REVOKED / INVALID_OR_TAMPERED |
 | Audit | Hash-chained events, verify-chain with the failing sequence, tamper demo script |
 | Dashboards | Real aggregations for all 8 roles, national/regional drill-down, CSV reports (aggregated, masked) |
-| UI | GST-portal-style layout, A- / A / A+ text size, high contrast, English + partial Hindi, keyboard focus, responsive |
+| UI | GST-portal-style layout, high contrast, English + partial Hindi, keyboard focus, responsive, one-click demo sign-in |
 
 ## Technology
 
@@ -60,7 +60,7 @@ APAAR Setu/
 │   └── src/
 │       ├── app/          # router, app shell, navigation, route guard
 │       ├── components/   # shared UI (buttons, tables, badges, modal, forms, toasts)
-│       ├── features/     # auth context, preferences (text size, contrast, language)
+│       ├── features/     # auth context, preferences (contrast, language)
 │       ├── pages/        # pages per role: public, college, aicte, admin, issuer, verifier, student, shared
 │       ├── services/     # API client (cookies + CSRF)
 │       ├── styles/       # theme tokens from Instruction/color_theme.md
@@ -169,6 +169,8 @@ Created by `npm run seed`, all with reserved `.test` addresses:
 | `operator.xyz.demo@example.test` / `head.xyz.demo@example.test` | College Operator / Head | XYZ-DEMO (other side of the conflict) |
 
 Passwords are **not** in this repository. They are printed by the seed command only.
+
+On the sign-in page, **Quick demo access** signs in to any of these accounts with one click, no password. It is on by default in development and off in production unless `DEMO_LOGIN=true` (set for the public demo in `render.yaml`); it never works for non-demo accounts. See [`docs/SECURITY_AND_LIMITATIONS.md`](docs/SECURITY_AND_LIMITATIONS.md).
 
 Follow [`docs/DEMO_GUIDE.md`](docs/DEMO_GUIDE.md) for the seven-minute demonstration.
 

@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { screen, within } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Route } from 'react-router-dom';
 import LoginPage, { validateLogin } from '../pages/public/LoginPage';
@@ -58,6 +58,44 @@ describe('login form', () => {
   });
 });
 
+describe('quick demo access', () => {
+  const DEMO_ACCOUNTS = {
+    enabled: true,
+    accounts: [
+      { email: 'operator.demo@example.test', role: 'COLLEGE_OPERATOR', scope: 'ABC Institute of Technology (Demo)' },
+      { email: 'operator.xyz.demo@example.test', role: 'COLLEGE_OPERATOR', scope: 'XYZ Engineering College (Demo)' },
+      { email: 'student.demo@example.test', role: 'STUDENT', scope: 'Aarav Sharma (Demo Student)' },
+    ],
+  };
+  const loginRoutes = [<Route key="l" path="/login" element={<LoginPage />} />, <Route key="c" path="/college" element={<p>College home</p>} />];
+
+  test('one button per role; one click signs in with the CSRF header and opens the role home', async () => {
+    const { calls } = mockFetch({
+      ...signedOut(),
+      'GET /auth/demo-accounts': DEMO_ACCOUNTS,
+      'POST /auth/demo-login': { user: USERS.operator, csrfToken: 'new-token' },
+      'GET /notifications*': { items: [], unreadCount: 0 },
+    });
+    renderWithProviders(null, { route: '/login', routes: loginRoutes });
+    const panel = await screen.findByRole('region', { name: 'Quick demo access' });
+    expect(within(panel).getAllByRole('button', { name: /College Operator/ })).toHaveLength(2);
+    expect(screen.getByText(/More demo accounts/)).toBeInTheDocument();
+    await userEvent.click(within(panel).getByRole('button', { name: 'College Operator (Maker) ABC Institute of Technology (Demo)' }));
+    expect(await screen.findByText('College home')).toBeInTheDocument();
+    const demo = calls.find((c) => c.path === '/auth/demo-login');
+    expect(demo.body).toEqual({ email: 'operator.demo@example.test' });
+    expect(demo.headers['X-CSRF-Token']).toBe('test-csrf-token');
+  });
+
+  test('hidden when the server has demo access switched off; the password form still works', async () => {
+    mockFetch({ ...signedOut(), 'GET /auth/demo-accounts': { enabled: false, accounts: [] } });
+    renderWithProviders(<LoginPage />, { route: '/login' });
+    expect(await screen.findByLabelText(/^Email address/)).toBeInTheDocument();
+    await waitFor(() => expect(screen.queryByText('Quick demo access')).not.toBeInTheDocument());
+    expect(screen.getByRole('button', { name: /sign in/i })).toBeInTheDocument();
+  });
+});
+
 describe('route guards (UX only - the API enforces permissions)', () => {
   const tree = [
     <Route key="p" element={<ProtectedRoute roles={['AICTE_SYSTEM_ADMIN']} />}><Route path="/admin" element={<p>Admin area</p>} /></Route>,
@@ -104,20 +142,30 @@ describe('application shell', () => {
     expect(within(nav).queryByText('Upload batch')).not.toBeInTheDocument();
   });
 
-  test('skip link, prototype notice and footer disclaimer are present', async () => {
+  test('skip link, prototype notice and the short footer are present', async () => {
     mockFetch(signedOut());
     renderWithProviders(null, { route: '/', routes: shell(<p>content</p>) });
-    expect((await screen.findAllByText('Skip to main content'))[0]).toHaveAttribute('href', '#main-content');
+    expect(await screen.findByText('Skip to main content')).toHaveAttribute('href', '#main-content');
     expect(screen.getByText(/not an official AICTE, Ministry of Education or APAAR system/i)).toBeInTheDocument();
-    expect(screen.getByText('Prototype for SIH 2026, not an official AICTE system.')).toBeInTheDocument();
+    const footer = screen.getByRole('contentinfo');
+    expect(within(footer).getByText('APAAR Setu (Prototype)')).toBeInTheDocument();
+    expect(within(footer).getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual(['#top']);
   });
 
-  test('text size, high contrast and Hindi controls work', async () => {
+  test('signed-out header has the display controls and no Login or Verify buttons', async () => {
     mockFetch(signedOut());
     renderWithProviders(null, { route: '/', routes: shell(<p>content</p>) });
-    await userEvent.click(await screen.findByRole('button', { name: 'Increase text size' }));
-    expect(document.documentElement.style.getPropertyValue('--font-scale')).toBe('112.5%');
-    await userEvent.click(screen.getByRole('button', { name: /high contrast/i }));
+    const header = await screen.findByRole('banner');
+    expect(within(header).getByRole('button', { name: /high contrast/i })).toBeInTheDocument();
+    expect(within(header).getByLabelText('Language')).toBeInTheDocument();
+    expect(within(header).queryByRole('link', { name: /login|verify credential/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /text size/i })).not.toBeInTheDocument();
+  });
+
+  test('high contrast and Hindi controls work', async () => {
+    mockFetch(signedOut());
+    renderWithProviders(null, { route: '/', routes: shell(<p>content</p>) });
+    await userEvent.click(await screen.findByRole('button', { name: /high contrast/i }));
     expect(document.documentElement).toHaveAttribute('data-contrast', 'high');
     await userEvent.selectOptions(screen.getByLabelText('Language'), 'hi');
     expect(await screen.findByText('मुख पृष्ठ')).toBeInTheDocument();

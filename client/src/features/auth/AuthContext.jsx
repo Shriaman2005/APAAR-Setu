@@ -62,13 +62,21 @@ export function AuthProvider({ children }) {
     return () => window.removeEventListener('apaar:unauthorized', handleUnauthorized);
   }, []);
 
-  const login = useCallback(async (email, password) => {
-    const data = await api('/auth/login', { method: 'POST', body: { email, password } });
+  const acceptSignIn = useCallback((data) => {
     setCsrfToken(data.csrfToken);
     setUser(data.user);
     setSessionMessage(null);
     return data.user;
   }, []);
+
+  const login = useCallback(async (email, password) => (
+    acceptSignIn(await api('/auth/login', { method: 'POST', body: { email, password } }))
+  ), [acceptSignIn]);
+
+  // Prototype demos only: one-click sign-in to a seeded demo account (server must allow it).
+  const demoLogin = useCallback(async (email) => (
+    acceptSignIn(await api('/auth/demo-login', { method: 'POST', body: { email } }))
+  ), [acceptSignIn]);
 
   // Only clears local state after the server confirms the session was destroyed.
   const logout = useCallback(async () => {
@@ -78,8 +86,8 @@ export function AuthProvider({ children }) {
   }, []);
 
   const value = useMemo(
-    () => ({ user, status, login, logout, refreshUser, sessionMessage, setCsrfToken }),
-    [user, status, login, logout, refreshUser, sessionMessage]
+    () => ({ user, status, login, demoLogin, logout, refreshUser, sessionMessage, setCsrfToken }),
+    [user, status, login, demoLogin, logout, refreshUser, sessionMessage]
   );
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

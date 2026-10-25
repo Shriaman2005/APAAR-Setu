@@ -83,16 +83,14 @@ try {
     if (await home.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1)) throw new Error('horizontal overflow');
     await shot(home, 'home-mobile');
   });
-  await step('text size, high contrast and Hindi controls', async () => {
+  await step('high contrast and Hindi controls', async () => {
     await home.setViewport({ width: 1280, height: 900 });
     await home.goto(BASE, { waitUntil: 'networkidle0' });
-    await home.click('button[aria-label="Increase text size"]');
     await home.click('::-p-text(High contrast)');
     await home.select('#language-select', 'hi');
     await home.waitForSelector('::-p-text(मुख पृष्ठ)');
     await home.select('#language-select', 'en');
     await home.click('::-p-text(High contrast)');
-    await home.click('button[aria-label="Reset text size"]');
   });
   await step('login validation and generic error', async () => {
     await home.goto(`${BASE}/login`, { waitUntil: 'networkidle0' });

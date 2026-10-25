@@ -16,14 +16,31 @@ async function csrfToken(req, res) {
   res.json({ csrfToken: generateToken(req) });
 }
 
-async function login(req, res) {
-  const user = await authService.verifyCredentials(req.validBody.email, req.validBody.password);
-  // New session id after login prevents session fixation (spec 03 section 2 step 3).
+// Used by password and demo sign-in alike. A new session id after login prevents session
+// fixation (spec 03 section 2 step 3). Returns the new CSRF token.
+async function startSession(req, user) {
   await regenerateSession(req);
   req.session.userId = String(user._id);
   req.session.sessionVersion = user.sessionVersion;
   req.session.authenticatedAt = new Date().toISOString();
-  const token = generateToken(req, true);
+  return generateToken(req, true);
+}
+
+async function login(req, res) {
+  const user = await authService.verifyCredentials(req.validBody.email, req.validBody.password);
+  const token = await startSession(req, user);
+  res.json({ user: await authService.describeUser(user), csrfToken: token });
+}
+
+// Prototype demos only: the accounts offered for one-click sign-in (empty when DEMO_LOGIN is off).
+async function demoAccounts(req, res) {
+  const enabled = req.app.locals.config.demoLogin;
+  res.json({ enabled, accounts: enabled ? await authService.listDemoAccounts() : [] });
+}
+
+async function demoLogin(req, res) {
+  const user = await authService.demoSignIn(req.validBody.email);
+  const token = await startSession(req, user);
   res.json({ user: await authService.describeUser(user), csrfToken: token });
 }
 
@@ -61,4 +78,4 @@ async function setPassword(req, res) {
   res.json({ passwordSet: true, purpose: result.purpose });
 }
 
-module.exports = { csrfToken, login, logout, me, changePassword, setPassword };
+module.exports = { csrfToken, login, demoAccounts, demoLogin, logout, me, changePassword, setPassword };
