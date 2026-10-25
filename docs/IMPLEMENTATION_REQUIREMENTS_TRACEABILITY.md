@@ -126,7 +126,7 @@ Paths: `S/` = `server/src/`, `C/` = `client/src/`, `T/` = `server/tests/`.
 
 | # | Requirement | Implementation | Status |
 | --- | --- | --- | --- |
-| 77 | GST-portal layout: utility strip, header with logo, navy nav with orange active underline, home blocks, navy footer with prototype line, last-updated date, back to top | `C/app/AppShell.jsx`, `C/pages/public/HomePage.jsx` | Done |
+| 77 | GST-portal layout: utility strip, header with logo, navy nav with orange active underline, home blocks, navy footer with prototype line, last-updated date, back to top | `C/app/AppShell.jsx`, `C/pages/public/HomePage.jsx` | Done, with one deliberate change: at the user's request (2026-10-25) the home page shows only a welcome message with Login and Verify credential; the news, due-dates, help-topics, help-desk and resources blocks were removed |
 | 78 | Palette tokens, button variants, cards, KPI tiles, tables, badges (icon + text), alerts, forms, stepper, modal overlay | `C/styles/theme.css`, `C/components/*` | Done |
 | 79 | Accessibility checklist: skip link, A-/A/A+ up to 150%, high contrast, visible focus, no colour-only information | `PreferencesContext.jsx`, theme | Done; Lighthouse/axe audit **not** run |
 | 80 | Language selector | English + Hindi for site chrome, home and sign-in (labelled "आंशिक"/partial) | Partial |

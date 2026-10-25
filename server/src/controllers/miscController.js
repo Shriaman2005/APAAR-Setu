@@ -1,7 +1,5 @@
-// Health, public overview, dashboards, reports, audit and notifications.
+// Health, dashboards, reports, audit and notifications.
 const mongoose = require('mongoose');
-const { SeatPolicy } = require('../models');
-const { POLICY_STATUS } = require('../config/constants');
 const { dbState, isDatabaseConnected } = require('../config/db');
 const dashboards = require('../services/dashboardService');
 const reports = require('../services/reportService');
@@ -20,17 +18,6 @@ async function health(_req, res) {
   });
 }
 
-// Public home-page data: only published (synthetic) policy dates, no counts or personal data.
-async function publicOverview(_req, res) {
-  const policies = mongoose.connection.readyState === 1
-    ? await SeatPolicy.find({ status: POLICY_STATUS.PUBLISHED }, { academicYear: 1, version: 1, sourceType: 1, admissionWindow: 1 }).sort({ academicYear: -1 }).lean()
-    : [];
-  res.json({
-    prototypeNotice: 'APAAR Setu is a student-project prototype using synthetic data. It is not an official AICTE, Ministry of Education or APAAR system.',
-    activePolicies: policies.map((p) => ({ academicYear: p.academicYear, version: p.version, sourceType: p.sourceType, admissionWindow: p.admissionWindow })),
-  });
-}
-
 async function sendReport(req, res, regional) {
   const report = await reports.institutionReport(req.user, req.query, { regional });
   sendCsv(res, `${regional ? 'regional' : 'national'}-institution-report-DEMO.csv`, toCsv(report.headers, report.rows));
@@ -38,7 +25,6 @@ async function sendReport(req, res, regional) {
 
 module.exports = {
   health,
-  publicOverview,
   collegeDashboard: async (req, res) => res.json(await dashboards.collegeDashboard(req.user, req.query)),
   nationalDashboard: async (req, res) => res.json(await dashboards.aicteDashboard(req.user, req.query, { regional: false })),
   regionalDashboard: async (req, res) => res.json(await dashboards.aicteDashboard(req.user, req.query, { regional: true })),

@@ -70,6 +70,7 @@ Environment: Ubuntu 24.04, Node 22.23.4, npm 11.13. Docker and a system MongoDB 
 
 ## 6. Assumptions and decisions (proposed implementation, not official policy)
 
+- Home page kept minimal at the user's request (2026-10-25): a welcome message with Login and Verify credential. The GST-style home blocks from `color_theme.md` (news, due dates, help topics, help desk, resources) and the `/public/overview` endpoint that fed them were removed.
 - Two-step warning disposition (operator justifies, head accepts); PENDING identity checks block by default.
 - Duplicate key: student code or demo identifier + course + academic year; "already active at this institution" is also an L3 error.
 - PROVISIONAL and CONFIRMED occupy seats; leaving them releases the seat exactly once.

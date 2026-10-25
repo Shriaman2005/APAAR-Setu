@@ -76,7 +76,7 @@ try {
   await step('home page renders on desktop and mobile without horizontal scrolling', async () => {
     await home.setViewport({ width: 1280, height: 900 });
     await home.goto(BASE, { waitUntil: 'networkidle0' });
-    await home.waitForSelector('::-p-text(News and updates)');
+    await home.waitForSelector('::-p-text(Welcome to APAAR Setu)');
     await shot(home, 'home-desktop');
     await home.setViewport({ width: 390, height: 844, isMobile: true });
     await home.reload({ waitUntil: 'networkidle0' });

@@ -257,10 +257,9 @@ main#main-content { min-height: 60vh; }
 .bell-count { position: absolute; top: -4px; right: -6px; background: var(--red); color: #fff; border-radius: 999px; font-size: 0.7rem; padding: 0 5px; font-weight: 700; }
 
 /* Home page */
-.home-hero { background: var(--navy); color: #fff; border-radius: var(--radius); padding: 28px; }
+.home-hero { background: var(--navy); color: #fff; border-radius: var(--radius); padding: 56px 28px; text-align: center; }
 .home-hero h1 { color: #fff; }
-.home-block { height: 100%; }
-.home-block ul { padding-left: 1.1rem; margin-bottom: 0; }
+.home-hero .lead { max-width: 44rem; margin: 0 auto 1.5rem; }
 
 /* Printable demo certificate */
 .certificate { border: 6px double var(--navy); padding: 32px; background: #fff; position: relative; }

@@ -1,4 +1,4 @@
-// Health, public overview, dashboards, reports, audit and notifications.
+// Health, dashboards, reports, audit and notifications.
 const express = require('express');
 const misc = require('../controllers/miscController');
 const { requireAuth, requireRole } = require('../middleware/auth');
@@ -7,7 +7,6 @@ const { ROLES } = require('../config/constants');
 module.exports = function miscRoutes() {
   const router = express.Router();
   router.get('/health', misc.health);
-  router.get('/public/overview', misc.publicOverview);
 
   router.get('/dashboard/college', requireAuth, requireRole(ROLES.COLLEGE_OPERATOR, ROLES.COLLEGE_HEAD), misc.collegeDashboard);
   router.get('/dashboard/aicte/national', requireAuth, requireRole(ROLES.AICTE_NATIONAL_OFFICER), misc.nationalDashboard);

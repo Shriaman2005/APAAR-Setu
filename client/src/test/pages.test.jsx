@@ -2,8 +2,9 @@ import { describe, expect, test } from 'vitest';
 import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import BatchDetailPage from '../pages/college/batch/BatchDetailPage';
+import HomePage from '../pages/public/HomePage';
 import { ConsentInboxPage } from '../pages/student/StudentPages';
-import { mockFetch, renderWithProviders, signedIn, USERS } from './utils';
+import { mockFetch, renderWithProviders, signedIn, signedOut, USERS } from './utils';
 
 const BATCH_ID = 'BATCH-ABC-DEMO-20261024-TEST';
 
@@ -81,5 +82,24 @@ describe('student consent inbox', () => {
     await userEvent.click(within(dialog).getByRole('button', { name: /approve selected fields/i }));
     await waitFor(() => expect(calls.some((c) => c.path === '/consents/CNS-1/approve')).toBe(true));
     expect(calls.find((c) => c.path === '/consents/CNS-1/approve').body).toEqual({ approvedFields: ['enrolmentStatus'] });
+  });
+});
+
+describe('home page', () => {
+  test('signed out: welcome message with Login and Verify credential only', async () => {
+    mockFetch(signedOut());
+    renderWithProviders(<HomePage />, { route: '/' });
+    expect(await screen.findByRole('heading', { level: 1, name: 'Welcome to APAAR Setu' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Login' })).toHaveAttribute('href', '/login');
+    expect(screen.getByRole('link', { name: 'Verify credential' })).toHaveAttribute('href', '/verify');
+    expect(screen.getAllByRole('link')).toHaveLength(2);
+    expect(screen.queryByText(/news and updates|due dates|help topics|help desk|resources/i)).not.toBeInTheDocument();
+  });
+
+  test('signed in: the first button goes to the role dashboard instead of Login', async () => {
+    mockFetch(signedIn(USERS.operator));
+    renderWithProviders(<HomePage />, { route: '/' });
+    expect(await screen.findByRole('link', { name: 'Go to my dashboard' })).toHaveAttribute('href', '/college');
+    expect(screen.queryByRole('link', { name: 'Login' })).not.toBeInTheDocument();
   });
 });

@@ -32,7 +32,6 @@ Role abbreviations: **OP** college operator, **HEAD** college head, **NAT** nati
 | Method | Path | Access | Notes |
 | --- | --- | --- | --- |
 | GET | `/health` | public | `{ status, database, topology, transactionsSupported }` |
-| GET | `/public/overview` | public | *added*. Prototype notice + published policy windows (home page) |
 | GET | `/verify/:credentialRef` | public, rate-limited | Minimal QR status: `VALID` / `REVOKED` / `INVALID_OR_TAMPERED`, credential type, issuer, issue date, reference fingerprint, disclaimer. No personal data |
 
 ## Authentication
