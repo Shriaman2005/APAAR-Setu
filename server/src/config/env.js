@@ -32,6 +32,9 @@ function buildConfig(overrides = {}) {
   const isProduction = nodeEnv === 'production';
 
   const sessionSecret = process.env.SESSION_SECRET || '';
+  // Public address of the site. Render sets RENDER_EXTERNAL_URL (https://<service>.onrender.com)
+  // automatically, so a Render deployment works without typing its URL into CLIENT_ORIGIN.
+  const publicOrigin = process.env.CLIENT_ORIGIN || process.env.RENDER_EXTERNAL_URL || 'http://localhost:5173';
   const config = {
     nodeEnv,
     isProduction,
@@ -40,8 +43,8 @@ function buildConfig(overrides = {}) {
     mongodbUri: process.env.MONGODB_URI || '',
     sessionSecret,
     sessionMaxAgeMs: readInt('SESSION_MAX_AGE_MS', 60 * 60 * 1000),
-    clientOrigin: process.env.CLIENT_ORIGIN || 'http://localhost:5173',
-    publicVerifyBaseUrl: process.env.PUBLIC_VERIFY_BASE_URL || process.env.CLIENT_ORIGIN || 'http://localhost:5173',
+    clientOrigin: publicOrigin,
+    publicVerifyBaseUrl: process.env.PUBLIC_VERIFY_BASE_URL || publicOrigin,
     maxUploadMb: readInt('MAX_UPLOAD_MB', 5),
     maxRowsPerBatch: readInt('MAX_ROWS_PER_BATCH', 10000),
     trustProxy: readInt('TRUST_PROXY', 0),

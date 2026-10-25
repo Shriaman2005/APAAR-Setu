@@ -7,6 +7,7 @@
     "install:all": "npm install && npm --prefix server install && npm --prefix client install",
     "db:dev": "npm --prefix server run db:dev",
     "seed": "npm --prefix server run seed",
+    "seed:live": "node --env-file=.env.live server/scripts/seed.js --live",
     "dev:server": "npm --prefix server run dev",
     "dev:client": "npm --prefix client run dev",
     "dev": "concurrently --names api,web --prefix-colors blue,green \"npm run dev:server\" \"npm run dev:client\"",

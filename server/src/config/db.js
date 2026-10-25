@@ -31,7 +31,7 @@ async function connectDatabase(uri, options = {}) {
         'multi-document commits will be refused until you use a replica set. See README > Database setup.'
     );
   } else {
-    logger.info(`MongoDB connected (${topology.topology}); multi-document transactions available.`);
+    logger.info(`MongoDB connected to database "${mongoose.connection.name}" (${topology.topology}); multi-document transactions available.`);
   }
   return topology;
 }

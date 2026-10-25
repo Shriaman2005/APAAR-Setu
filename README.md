@@ -149,7 +149,7 @@ npm run dev          # API on http://localhost:5000 and React app on http://loca
 
 (or run `npm run dev:server` and `npm run dev:client` in two terminals). Open **http://localhost:5173**. The Vite dev server forwards `/api` to Express, so the browser sees one origin.
 
-**Production-style run:** `npm run build`, then start the server with `NODE_ENV=production` (it serves `client/dist` from the same origin). Behind HTTPS keep `COOKIE_SECURE=true` (the default in production) and set `TRUST_PROXY=1` behind a proxy. No public deployment was made as part of this work.
+**Production-style run:** `npm run build`, then start the server with `NODE_ENV=production` (it serves `client/dist` from the same origin). Behind HTTPS keep `COOKIE_SECURE=true` (the default in production) and set `TRUST_PROXY=1` behind a proxy. To put the demo online (Render + MongoDB Atlas, free tiers), follow [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 ## Demo accounts (development only)
 
@@ -205,4 +205,4 @@ Backend tests never touch your development data. To reuse an existing replica se
 - No OTP/e-sign, email delivery, MFA or production identity provider. Activation/reset links are shown once to the administrator.
 - No performance, accuracy or compliance claims have been measured. A formal WCAG/GIGW audit has not been done.
 
-More detail: [`docs/SECURITY_AND_LIMITATIONS.md`](docs/SECURITY_AND_LIMITATIONS.md). Other docs: [architecture](docs/ARCHITECTURE.md) · [API reference](docs/API_REFERENCE.md) · [requirements traceability](docs/IMPLEMENTATION_REQUIREMENTS_TRACEABILITY.md) · [implementation status](docs/IMPLEMENTATION_STATUS.md).
+More detail: [`docs/SECURITY_AND_LIMITATIONS.md`](docs/SECURITY_AND_LIMITATIONS.md). Other docs: [architecture](docs/ARCHITECTURE.md) · [API reference](docs/API_REFERENCE.md) · [deployment](docs/DEPLOYMENT.md) · [requirements traceability](docs/IMPLEMENTATION_REQUIREMENTS_TRACEABILITY.md) · [implementation status](docs/IMPLEMENTATION_STATUS.md).
