@@ -66,7 +66,7 @@ Environment: Ubuntu 24.04, Node 22.23.4, npm 11.13. Docker and a system MongoDB 
 | Accessibility audit (Lighthouse/axe/WCAG/GIGW) | Not done - no compliance claim is made |
 | Docker Compose replica set | Provided, untested (Docker unavailable) |
 | Real APAAR / ABC / DigiLocker / AICTE integrations, OTP/e-sign, email, MFA/SSO, signed credentials, durable job queue, load testing | Out of prototype scope by specification; mock adapters and labels used instead |
-| Public deployment | Prepared, not yet live: `render.yaml` + [`DEPLOYMENT.md`](DEPLOYMENT.md) (Render + MongoDB Atlas). The Blueprint's install/build/start commands were run from a clean clone with `NODE_ENV=production`, and sign-in was checked behind a simulated HTTPS proxy (fails without `TRUST_PROXY=1`, works with it). Not yet run on Render or Atlas themselves |
+| Public deployment | Live demo on Render (free web service from `render.yaml`) with a MongoDB Atlas M0 cluster, set up as in [`DEPLOYMENT.md`](DEPLOYMENT.md). Verified on the live site on 2026-10-25: health (Atlas replica set, transactions available); sign-in, session and dashboard for all 11 demo accounts; sample batch certified on Atlas; 58-page headless-Chrome sweep with no errors; CSP and HSTS headers; `HttpOnly; Secure; SameSite=Lax` session cookie; HTTP redirects to HTTPS. The free instance sleeps when idle |
 
 ## 6. Assumptions and decisions (proposed implementation, not official policy)
 

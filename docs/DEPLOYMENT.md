@@ -108,6 +108,9 @@ provides, so `CLIENT_ORIGIN` and `PUBLIC_VERIFY_BASE_URL` are not needed.
 3. Give the student account a record: sign in as `operator.demo@example.test`, upload
    `fixtures/clean_batch.csv` and send it for review, then sign in as `head.demo@example.test` and
    certify it (see [`DEMO_GUIDE.md`](DEMO_GUIDE.md)).
+4. Optional: open every page for every role in headless Chrome (it only reads, so the demo data is
+   not changed):
+   `E2E_BASE_URL=https://<your-address> node --env-file=.env.live e2e/route-sweep.mjs`
 
 ## Everyday use
 
