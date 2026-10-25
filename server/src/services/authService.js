@@ -33,9 +33,9 @@ function checkPasswordPolicy(password, email) {
   if (!/[A-Za-z]/.test(password || '')) problems.push('at least one letter');
   if (!/\d/.test(password || '')) problems.push('at least one digit');
   const localPart = normaliseEmail(email).split('@')[0];
-  if (localPart && localPart.length >= 4 && String(password).toLowerCase().includes(localPart)) problems.push('must not contain your email name');
+  if (localPart && localPart.length >= 4 && String(password).toLowerCase().includes(localPart)) problems.push('no part of your email name');
   if (problems.length > 0) {
-    throw unprocessable('PASSWORD_POLICY', `Password must have ${problems.join(', ')}.`, { fieldErrors: { newPassword: problems } });
+    throw unprocessable('PASSWORD_POLICY', `Password must contain ${problems.join(', ')}.`, { fieldErrors: { newPassword: problems } });
   }
 }
 
